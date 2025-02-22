@@ -8,7 +8,7 @@ public class DiagMatrix extends Matrix {
     public DiagMatrix(double[] elements) {
         super(elements.length);
         for (int i = 0; i < elements.length; i++) {
-            matrix[i*elements.length + i] = elements[i];
+            super.setElement(i, i, elements[i]);
         }
     }
 
@@ -19,17 +19,10 @@ public class DiagMatrix extends Matrix {
 
     @Override
     public void setElement(int row, int col, double value) {
-        if (row == col) {
-            super.setElement(row, col, value);
+        if (row != col) {
+            throw new IllegalArgumentException("row does not match column");
         }
-        else {
-            if (value == 0) {
-                super.setElement(row, col, 0);
-            }
-            else {
-                throw new IllegalArgumentException();
-            }
-        }
+        super.setElement(row, col, value);
     }
 
     @Override

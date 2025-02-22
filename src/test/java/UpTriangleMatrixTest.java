@@ -1,4 +1,3 @@
-import classes.DiagMatrix;
 import classes.UpTriangleMatrix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

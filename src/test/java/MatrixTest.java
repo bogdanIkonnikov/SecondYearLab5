@@ -4,6 +4,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class MatrixTest {
+
+    @Test
+    void testCalculateDeterminant() {
+        double[] data = {
+                1, 0,
+                3, 2
+        };
+        Matrix matrix = new Matrix(data);
+        matrix.calculateDeterminant();
+        assertEquals(2, matrix.getDeterminant(), 0.0001);
+        matrix.setElement(0,1,2);
+        assertEquals(2, matrix.getDeterminant(), 0.0001);
+    }
+
     @Test
     void testGetDeterminant2x2() {
         double[] data = {
@@ -12,6 +26,7 @@ public class MatrixTest {
         };
 
         Matrix matrix = new Matrix(data);
+        matrix.calculateDeterminant();
         assertEquals(2, matrix.getDeterminant(), 0.0001);
     }
     @Test
@@ -29,6 +44,7 @@ public class MatrixTest {
                 1, 0, 5, 0
         };
         Matrix matrix = new Matrix(data);
+        matrix.calculateDeterminant();
         assertEquals(-30, matrix.getDeterminant(), 0.0001);
     }
     @Test
@@ -39,6 +55,7 @@ public class MatrixTest {
                 0, 5, 2
         };
         Matrix matrix = new Matrix(data);
+        matrix.calculateDeterminant();
         assertEquals(-4, matrix.getDeterminant(), 0.0001);
     }
 
