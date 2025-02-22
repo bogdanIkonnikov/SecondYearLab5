@@ -7,7 +7,9 @@ import java.util.Objects;
 
 public class Matrix implements IMatrix {
     private final int size;
-    double[] matrix;
+    private double[] matrix;
+    private double determinant;
+    private boolean checkDeterminant = false;
 
     public Matrix(int size) {
         this.size = size;
@@ -27,6 +29,7 @@ public class Matrix implements IMatrix {
     @Override
     public void setElement(int row, int col, double value) {
         matrix[row * size + col] = value;
+        checkDeterminant = false;
     }
 
     private void swap(int row1, int row2) {
@@ -37,9 +40,11 @@ public class Matrix implements IMatrix {
             matrix[row2 * size + col] = buffer;
         }
     }
+    public boolean checkDeterminant(){
+        return checkDeterminant;
+    }
 
-    @Override
-    public double getDeterminant() {
+    public void calculateDeterminant() {
         double fixed, determinant = 1;
         for (int i = 0; i < size-1; i++) { //номер зануляемого столбца
             for (int row = 1; row < size; row++) { //строка к которой прибавляем
@@ -65,6 +70,12 @@ public class Matrix implements IMatrix {
         for (int i = 0; i < size; i++) {
             determinant *= matrix[i * size + i];
         }
+        checkDeterminant = true;
+        this.determinant = determinant;
+    }
+
+    @Override
+    public double getDeterminant() {
         return determinant;
     }
 
@@ -79,4 +90,5 @@ public class Matrix implements IMatrix {
     public int hashCode() {
         return Objects.hash(size, Arrays.hashCode(matrix));
     }
+
 }
